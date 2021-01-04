@@ -1,7 +1,7 @@
 from src.GraphInterface import GraphInteface
 
 
-class DiGraph(GraphInteface):
+class DiGraph(GraphInteface):  # TODO: IMPLEMENT
 
     def __init__(self):  # initialize self
         self.V = dict()

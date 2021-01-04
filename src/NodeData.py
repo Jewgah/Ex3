@@ -1,1 +1,1 @@
-class NodeData(object):
+class NodeData(object):  # TODO: IMPLEMENT

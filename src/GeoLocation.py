@@ -1,2 +1,2 @@
-class GeoLocation(object):
+class GeoLocation(object):  # TODO: IMPLEMENT
 
