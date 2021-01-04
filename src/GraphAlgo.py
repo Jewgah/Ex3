@@ -7,7 +7,7 @@ import json
 # TODO: IMPLEMENT
 class GraphAlgo(GraphAlgoInterface):
 
-    def __init__(self):
+    def __init__(self) -> object:
         self.graph = DiGraph()
 
     def get_graph(self) -> GraphInterface:
