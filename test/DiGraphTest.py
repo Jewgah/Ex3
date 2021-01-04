@@ -1,4 +1,9 @@
+
 from src.DiGraph import DiGraph
+import unittest
+from unittest import TestCase
+from src.NodeData import Node_data
+
 if __name__ == '__main__':
     p=(5,4)
     # node=Node_data(0,p)
@@ -15,7 +20,7 @@ if __name__ == '__main__':
     print("mc:", graph.get_mc())
     print("vsize:",graph.v_size())
     print("esize:",graph.e_size())
-    print("***********finish***************")
+    print("***********finish**************")
     print("                                ")
     print("***********add edge**************")
     print("add edge:",graph.add_edge(0,2,500))
@@ -25,7 +30,7 @@ if __name__ == '__main__':
     print("mc:", graph.get_mc())
     print("vsize:",graph.v_size())
     print("esize:",graph.e_size())
-    print("***********Finish***********************")
+    print("***********finish**************")
 
     print("                                ")
     print("***********get edge/vertex**************")
