@@ -1,7 +1,7 @@
-from GraphInterface import GraphInteface
+from src.GraphInterface import GraphInteface
 from typing import Dict
-from NodeData import Node_data
-from EdgeData import Edge_data
+from src.NodeData import Node_data
+from src.EdgeData import Edge_data
 # TODO: IMPLEMENT
 class DiGraph(GraphInteface):
 

@@ -15,7 +15,7 @@ if __name__ == '__main__':
     print("mc:", graph.get_mc())
     print("vsize:",graph.v_size())
     print("esize:",graph.e_size())
-    print("***********finish**************")
+    print("***********finish***************")
     print("                                ")
     print("***********add edge**************")
     print("add edge:",graph.add_edge(0,2,500))
@@ -25,7 +25,7 @@ if __name__ == '__main__':
     print("mc:", graph.get_mc())
     print("vsize:",graph.v_size())
     print("esize:",graph.e_size())
-    print("***********finish**************")
+    print("***********Finish***********************")
 
     print("                                ")
     print("***********get edge/vertex**************")

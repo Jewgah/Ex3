@@ -1,4 +1,3 @@
-import sys
 
 from src.DiGraph import DiGraph
 from src.GraphAlgo import GraphAlgo

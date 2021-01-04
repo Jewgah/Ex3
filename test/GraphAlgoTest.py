@@ -6,7 +6,7 @@ if __name__ == '__main__':
 
     graph = algo.get_graph()
 
-    print("***********get edge/vertex**************")
+    print("***********Get Edge/Vertex**************")
     vertexs = graph.get_all_v()
     for x in vertexs:
         print("key: ",x,"values: ",vertexs[x])
