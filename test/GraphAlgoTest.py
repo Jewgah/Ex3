@@ -1,4 +1,7 @@
-from GraphAlgo import GraphAlgo
+from src.GraphAlgo import GraphAlgo
+import unittest
+from unittest import TestCase
+
 if __name__ == '__main__':
     algo = GraphAlgo()
 
