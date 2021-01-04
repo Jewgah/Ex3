@@ -1,4 +1,4 @@
-from GraphAlgo import GraphAlgo
+from src.GraphAlgo import GraphAlgo
 if __name__ == '__main__':
     algo = GraphAlgo()
 
