@@ -1,6 +1,8 @@
+import sys
 
 from src.DiGraph import DiGraph
 from src.GraphAlgo import GraphAlgo
+
 
 def check():
     """
@@ -27,6 +29,7 @@ def check():
     check1()
     check2()
 
+
 def check0():
     """
     This function tests the naming (main methods of the DiGraph class, as defined in GraphInterface.
@@ -49,19 +52,21 @@ def check0():
     g_algo = GraphAlgo(g)
     print(g_algo.shortest_path(0, 3))
 
+
 def check1():
     """
        This function tests the naming (main methods of the GraphAlgo class, as defined in GraphAlgoInterface.
     :return:
     """
-    g_algo = GraphAlgo()        # init an empty graph - for the GraphAlgo
+    g_algo = GraphAlgo()  # init an empty graph - for the GraphAlgo
     file = "../data/T0.json"
-    g_algo.load_from_json(file) # init a GraphAlgo from a json file
+    g_algo.load_from_json(file)  # init a GraphAlgo from a json file
     print(g_algo.connected_components())
     print(g_algo.shortest_path(0, 3))
     print(g_algo.shortest_path(3, 1))
-    g_algo.save_to_json(file+'_saved')
+    g_algo.save_to_json(file + '_saved')
     g_algo.plot_graph()
+
 
 def check2():
     """ This function tests the naming, basic testing over A5 json file.
@@ -83,6 +88,7 @@ def check2():
     print(g_algo.connected_component(0))
     print(g_algo.connected_components())
     g_algo.plot_graph()
+
 
 if __name__ == '__main__':
     check()

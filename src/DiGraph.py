@@ -90,3 +90,7 @@ class DiGraph(GraphInteface):
 
     def all_out_edges_of_node(self, id1: int) -> dict:
         return self.__N_out.get(id1)
+
+    def __repr__(self):
+        return "Graph(Nodes: %s, Edges: %s )" % (
+            self.get_all_v(), self.__N_out)
