@@ -1,5 +1,6 @@
 # OOP-Ex3
 Fourth Assignment in OOP course in Python @Ariel University 2020
+
 @author Jordan Perez & Nathanael Benichou
 
 ## Directed Weighted Graph
@@ -41,7 +42,7 @@ Node_data is the class implementing vertices and Edge_data the class implementin
 
 # DiGraph class
 | Method  | Description  |
-| :----------- |:-------------|
+| :--------------- |:-------------|
 |.v_size(self) -> int:| Returns the number of vertices in the graph.|
 |.e_size(self) -> int:| Returns the number of edges in the graph.|
 |.get_mc(self) -> int:| Returns current version of graph.|
@@ -58,7 +59,7 @@ Node_data is the class implementing vertices and Edge_data the class implementin
 
 # GraphAlgo class
 | Method  | Description  |
-| :----------- |:-------------|
+| :--------------- |:-------------|
 |.__init__(self, other=DiGraph()):| inits the graph|
 |.load_from_json(self, file_name: str) -> bool:| Loads a graph from a .json file.|
 |.save_to_json(self, file_name: str) -> bool:| Saves the graph in .json to a file|
