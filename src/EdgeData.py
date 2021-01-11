@@ -17,5 +17,4 @@ class Edge_data:
         return self.__weight
 
     def __repr__(self):
-        return "Edge_data(src: %s, dest: %s, weight %s)" % (
-            self.__src, self.__dest, self.__weight)
+        return "%s" % ( self.__weight)

@@ -4,8 +4,11 @@ from src.GraphAlgoInterface import GraphAlgoInterface
 from src import GraphInterface
 import json
 import math
+import random
+import matplotlib.pyplot as matplot
 from queue import PriorityQueue
-from typing import Dict
+from src.NodeData import Node_data
+
 
 # global variable's
 s = []
@@ -115,27 +118,18 @@ class GraphAlgo(GraphAlgoInterface):
                     q.put(node2)
 
     # tarjan O(|v| + |E|)
-    def connected_component(self, id1: int) -> list:  #TODO: RECODE (USE the other connected_components
-        # init
-        for node in self.graph.get_all_v().values():
-            node.tag = 0
-            node.info = ""
-            node.weight = math.inf
+    def connected_component(self, id1: int) -> list:
+
         if self.graph is None or id1 not in self.graph.get_all_v():
             return []
 
-        global s, onStack, id, list_path
-        # init
-        s = []
-        onStack = dict()
-        id = 0
-        list_path = []
-        for x in self.graph.get_all_v().keys():
-            onStack.update({x: False})
-        # tarjan
-        self.__Tarjan(id1)
+        scclist = self.connected_components()
 
-        return list_path
+        for scc in scclist:
+            if id1 in scc:
+                return scc
+        else:
+            return []
 
     def connected_components(self) -> List[list]:
         # init
@@ -188,4 +182,23 @@ class GraphAlgo(GraphAlgoInterface):
             lists_path_path.insert(0, list_path)
 
     def plot_graph(self) -> None:
-        pass
+        graph = self.get_graph()
+
+        for node in graph.get_all_v().values():
+            node:Node_data=node
+            if node.getpos() is None:
+                node.setpos((random.uniform(35.18, 35.2), random.uniform(32.1, 32.2)))
+            matplot.plot(node.getpos()[0], node.getpos()[1], 'or', markersize=8)
+            matplot.text(node.getpos()[0], node.getpos()[1], str(node.getKey()))
+
+
+        for id in graph.get_all_v().keys():
+            for k, w in graph.all_out_edges_of_node(id).items():
+                x1 = graph.get_node(id).getpos()[0]
+                y1 = graph.get_node(id).getpos()[1]
+                x2 = graph.get_node(k).getpos()[0]
+                y2 = graph.get_node(k).getpos()[1]
+
+                matplot.arrow(x1, y1, (x2 - x1), (y2 - y1), length_includes_head=True, width=0.00003,
+                              head_width=0.00025)
+        matplot.show()

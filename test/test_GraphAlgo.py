@@ -1,11 +1,8 @@
 import unittest
-from unittest import TestCase
-
 from src.DiGraph import DiGraph
 from src.GraphAlgo import GraphAlgo
 
 
-# TODO: save/load shortestpath components
 class TestGraphAlgo(unittest.TestCase):
 
     def test_save_and_load(self):
@@ -110,10 +107,49 @@ class TestGraphAlgo(unittest.TestCase):
         self.assertEqual("[[1], [2, 3, 4]]", str(self.algo.connected_components()))
 
         # connected_components(id)
-        self.assertEqual("[[2, 3, 4]]", str(self.algo.connected_components(3)))
+        self.assertEqual("[2, 3, 4]", str(self.algo.connected_component(3)))
+
+    def test_plot_graph(self):
+        p1 = (1.21, 2.12, 3.16)
+        p2 = (2.45, 4.16, 11.22)
+        p3 = (10.6, 3.12, 3.04)
+        p4 = (17.6, 7.12, 3.014)
+
+        # add nodes
+        self.graph = DiGraph()
+        self.graph.add_node(1, p1)
+        self.graph.add_node(2, p2)
+        self.graph.add_node(3, p3)
+        self.graph.add_node(4, p4)  # no pos given
+
+        # add edges
+        self.graph.add_edge(1, 2, 2)
+        self.graph.add_edge(2, 3, 3)
+        self.graph.add_edge(3, 4, 4)
+        self.graph.add_edge(4, 2, 9)
+
+        # init graph algo
+        self.algo = GraphAlgo()
+        self.algo.__init__(self.graph)
+        # print(self.algo.get_graph())
+        self.algo.create_graph()
 
 
-# TODO: test with boaz graphs
+
+
+
+    def test_shortest(self):
+        # init graph algo
+        self.algo = GraphAlgo()
+
+        # load JSON file
+        self.algo.load_from_json("../data/Graph_no_pos/G_30000_240000_0.json");
+        # self.algo.load_from_json("../data/Graphs_on_circle/G_10_80_1.json");
+        # self.algo.load_from_json("../data/Graph_random_pos/G_10_80_0.json");
+
+        # self.algo.shortest_path(0, 30000)
+        self.algo.connected_components()
+
 
 if __name__ == '__main__':
     unittest.main()

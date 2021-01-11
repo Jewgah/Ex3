@@ -1,3 +1,6 @@
+import math
+
+
 class Node_data:
 
     def __init__(self, key: int, pos: tuple):
@@ -13,6 +16,9 @@ class Node_data:
     def getpos(self) -> tuple:
         return self.__pos
 
+    def setpos(self,pos:tuple):
+        self.__pos=pos
+
     # comparator for Priority Queue in Djikstra
     def __lt__(self, other):
         selfPriority = (self.weight, self.__key)
@@ -20,4 +26,4 @@ class Node_data:
         return selfPriority < otherPriority
 
     def __repr__(self):
-        return "Node_Data(id: %s, pos: %s)" % (self.__key, self.__pos)
+        return "(id: %s)" % self.__key
