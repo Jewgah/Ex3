@@ -9,7 +9,6 @@ import matplotlib.pyplot as matplot
 from queue import PriorityQueue
 from src.NodeData import Node_data
 
-
 # global variable's
 s = []
 onStack = {}
@@ -185,12 +184,11 @@ class GraphAlgo(GraphAlgoInterface):
         graph = self.get_graph()
 
         for node in graph.get_all_v().values():
-            node:Node_data=node
+            node: Node_data = node
             if node.getpos() is None:
                 node.setpos((random.uniform(35.18, 35.2), random.uniform(32.1, 32.2)))
             matplot.plot(node.getpos()[0], node.getpos()[1], 'or', markersize=8)
             matplot.text(node.getpos()[0], node.getpos()[1], str(node.getKey()))
-
 
         for id in graph.get_all_v().keys():
             for k, w in graph.all_out_edges_of_node(id).items():
@@ -199,6 +197,6 @@ class GraphAlgo(GraphAlgoInterface):
                 x2 = graph.get_node(k).getpos()[0]
                 y2 = graph.get_node(k).getpos()[1]
 
-                matplot.arrow(x1, y1, (x2 - x1), (y2 - y1), length_includes_head=True, width=0.00003,
-                              head_width=0.00025)
+                matplot.arrow(x1, y1, (x2 - x1), (y2 - y1), length_includes_head=True, width=0.00005,
+                              head_width=0.0011)
         matplot.show()

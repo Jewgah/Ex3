@@ -132,23 +132,22 @@ class TestGraphAlgo(unittest.TestCase):
         self.algo = GraphAlgo()
         self.algo.__init__(self.graph)
         # print(self.algo.get_graph())
-        self.algo.create_graph()
-
-
-
-
+        self.algo.plot_graph()
 
     def test_shortest(self):
         # init graph algo
         self.algo = GraphAlgo()
 
         # load JSON file
-        self.algo.load_from_json("../data/Graph_no_pos/G_30000_240000_0.json");
+        self.algo.load_from_json("../data/Graph_no_pos/G_10_80_0.json");
         # self.algo.load_from_json("../data/Graphs_on_circle/G_10_80_1.json");
         # self.algo.load_from_json("../data/Graph_random_pos/G_10_80_0.json");
 
         # self.algo.shortest_path(0, 30000)
         self.algo.connected_components()
+        self.algo.plot_graph()
+
+
 
 
 if __name__ == '__main__':

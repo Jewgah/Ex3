@@ -1,13 +1,15 @@
 from DiGraph import DiGraph
+from src.EdgeData import Edge_data
+from src.NodeData import Node_data
 
 if __name__ == '__main__':
     p = (5, 4)
-    # node=Node_data(0,p)
-    # node.weight=500
-    # print(node.getKey())
-    # print(node)
-    # edge=Edge_data(0,1,500)
-    # print(edge)
+    node = Node_data(0, p)
+    node.weight = 500
+    print(node.getKey())
+    print(node)
+    edge = Edge_data(0, 1, 500)
+    print(edge)
     graph = DiGraph()
     print("***********add node**************")
     print("add node:", graph.add_node(0, p))
