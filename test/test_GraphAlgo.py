@@ -3,6 +3,7 @@ from src.DiGraph import DiGraph
 from src.GraphAlgo import GraphAlgo
 from src.NodeData import Node_data
 
+
 class TestGraphAlgo(unittest.TestCase):
 
     def test_save_and_load(self):
@@ -107,7 +108,7 @@ class TestGraphAlgo(unittest.TestCase):
         self.assertEqual([[1], [2, 3, 4]], self.algo.connected_components())
 
         # connected_components(id)
-        self.assertEqual([3,4,2], self.algo.connected_component(3))
+        self.assertEqual([3, 4, 2], self.algo.connected_component(3))
 
     def test_plot_graph(self):
         p1 = (1.21, 2.12, 3.16)
@@ -138,13 +139,13 @@ class TestGraphAlgo(unittest.TestCase):
         self.algo = GraphAlgo()
 
         # load JSON file
-        # self.algo.load_from_json("../data/Graph_no_pos/G_10_80_0.json");
+        self.algo.load_from_json("../data/Graph_no_pos/G_30000_240000_0.json");
         # self.algo.load_from_json("../data/Graphs_on_circle/G_30000_240000_1.json");
-        self.algo.load_from_json("../data/Graphs_random_pos/G_30000_240000_2.json");
+        # self.algo.load_from_json("../data/Graphs_random_pos/G_30000_240000_2.json");
 
         # self.algo.shortest_path(0, 30000)
         print(self.algo.connected_components())
-        # self.algo.plot_graph()
+
 
 if __name__ == '__main__':
     unittest.main()
