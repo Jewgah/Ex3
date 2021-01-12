@@ -67,5 +67,6 @@ if __name__ == '__main__':
 
 
     print(algo1.shortest_path(1,4))
+    print(algo1.connected_component(4))
     print(algo1.connected_components())
 

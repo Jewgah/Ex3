@@ -1,7 +1,7 @@
 import unittest
 from src.DiGraph import DiGraph
 from src.GraphAlgo import GraphAlgo
-
+from src.NodeData import Node_data
 
 class TestGraphAlgo(unittest.TestCase):
 
@@ -104,23 +104,22 @@ class TestGraphAlgo(unittest.TestCase):
         self.algo.__init__(self.graph)
 
         # connected_components
-        self.assertEqual("[[1], [2, 3, 4]]", str(self.algo.connected_components()))
+        self.assertEqual([[1], [2, 3, 4]], self.algo.connected_components())
 
         # connected_components(id)
-        self.assertEqual("[2, 3, 4]", str(self.algo.connected_component(3)))
+        self.assertEqual([3,4,2], self.algo.connected_component(3))
 
     def test_plot_graph(self):
         p1 = (1.21, 2.12, 3.16)
         p2 = (2.45, 4.16, 11.22)
         p3 = (10.6, 3.12, 3.04)
-        p4 = (17.6, 7.12, 3.014)
 
         # add nodes
         self.graph = DiGraph()
         self.graph.add_node(1, p1)
         self.graph.add_node(2, p2)
         self.graph.add_node(3, p3)
-        self.graph.add_node(4, p4)  # no pos given
+        self.graph.add_node(4)  # no pos given
 
         # add edges
         self.graph.add_edge(1, 2, 2)
@@ -132,23 +131,20 @@ class TestGraphAlgo(unittest.TestCase):
         self.algo = GraphAlgo()
         self.algo.__init__(self.graph)
         # print(self.algo.get_graph())
-        self.algo.plot_graph()
+        self.algo.create_graph()
 
-    def test_shortest(self):
+    def test_given_graphs(self):
         # init graph algo
         self.algo = GraphAlgo()
 
         # load JSON file
-        self.algo.load_from_json("../data/Graph_no_pos/G_10_80_0.json");
-        # self.algo.load_from_json("../data/Graphs_on_circle/G_10_80_1.json");
-        # self.algo.load_from_json("../data/Graph_random_pos/G_10_80_0.json");
+        # self.algo.load_from_json("../data/Graph_no_pos/G_10_80_0.json");
+        # self.algo.load_from_json("../data/Graphs_on_circle/G_30000_240000_1.json");
+        self.algo.load_from_json("../data/Graphs_random_pos/G_30000_240000_2.json");
 
         # self.algo.shortest_path(0, 30000)
-        self.algo.connected_components()
-        self.algo.plot_graph()
-
-
-
+        print(self.algo.connected_components())
+        # self.algo.plot_graph()
 
 if __name__ == '__main__':
     unittest.main()

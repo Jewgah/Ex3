@@ -18,7 +18,7 @@ class DiGraph(GraphInteface):
     def v_size(self) -> int:
         return len(self.__V)
 
-    # Returns the number of edges in this g raph
+    # Returns the number of edges in this graph
     def e_size(self) -> int:
         return self.__edgeSize
 

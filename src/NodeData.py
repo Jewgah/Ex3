@@ -26,4 +26,4 @@ class Node_data:
         return selfPriority < otherPriority
 
     def __repr__(self):
-        return "(id: %s)" % self.__key
+        return "(id: %s)" % (self.__key)

@@ -8,11 +8,9 @@ import random
 import matplotlib.pyplot as matplot
 from queue import PriorityQueue
 from src.NodeData import Node_data
-
+from typing import Dict
 # global variable's
-s = []
-onStack = {}
-id = 0
+ids = {}
 list_path = []
 lists_path_path = []
 
@@ -122,73 +120,129 @@ class GraphAlgo(GraphAlgoInterface):
         if self.graph is None or id1 not in self.graph.get_all_v():
             return []
 
-        scclist = self.connected_components()
+        self.init_varibales()
+        global ids,list_path,lists_path_path
+        ids = {}
+        list_path = []
+        lists_path_path = []
 
-        for scc in scclist:
-            if id1 in scc:
-                return scc
-        else:
-            return []
+        for x in self.graph.get_all_v().keys():
+            ids.update({x:0})
 
-    def connected_components(self) -> List[list]:
+        self.__Tarjan(id1)
+
+        return list_path
+
+
+    def init_varibales(self):
         # init
         for node in self.graph.get_all_v().values():
             node.tag = 0
             node.info = ""
             node.weight = math.inf
 
-        if self.graph is None:
+    def connected_components(self) -> List[list]:
+
+        if self.graph is None :
             return []
 
-        global s, onStack, id, list_path, lists_path_path
-        # init
-        s = []
-        onStack = dict()
-        id = 0
+        self.init_varibales()
+        global ids,list_path,lists_path_path
+        ids = {}
         list_path = []
-        for x in self.graph.get_all_v().keys():
-            onStack.update({x: False})
-        # tarjan
-        for node in self.graph.get_all_v().values():
-            if node.tag == 0:
-                self.__Tarjan(node.getKey())
+        lists_path_path = []
 
+        for x in self.graph.get_all_v().keys():
+            ids.update({x:0})
+        for node in self.graph.get_all_v().keys():
+            if ids.get(node)==0:
+                self.__Tarjan(node)
         return lists_path_path
 
-    def __Tarjan(self, at: int):
-        global s, onStack, id, list_path, lists_path_path
-        node = self.graph.get_all_v().get(at)
-        s.append(node)
-        id += 1
-        # ids = tag low = weight
-        node.tag = id
-        node.weight = id
-        onStack.update({at: True})
+    # # Recursive Tarjan - Causing Recursion Depth issue
+    # def __Tarjan(self, at: int):
+    #     global s, onStack, id, list_path, lists_path_path
+    #     node = self.graph.get_all_v().get(at)
+    #     s.append(node)
+    #     id += 1
+    #     # ids = tag low = weight
+    #     node.tag = id
+    #     node.weight = id
+    #     onStack.update({at: True})
+    #
+    #     for to in self.graph.all_out_edges_of_node(at):
+    #         node1 = self.graph.get_all_v().get(to)
+    #         if node1.tag == 0: self.__Tarjan(node1.getKey())
+    #         if onStack.get(to) is True: node.weight = min(node.weight, node1.weight)
+    #
+    #     if node.tag == node.weight:
+    #         list_path = []
+    #         while s:
+    #             node_pop = s.pop()
+    #             list_path.insert(0, node_pop.getKey())
+    #             onStack.update({node_pop.getKey(): False})
+    #             node_pop.weight = node.tag
+    #             if node_pop.getKey() is node.getKey(): break
+    #         lists_path_path.insert(0, list_path)
 
-        for to in self.graph.all_out_edges_of_node(at):
-            node1 = self.graph.get_all_v().get(to)
-            if node1.tag == 0: self.__Tarjan(node1.getKey())
-            if onStack.get(to) is True: node.weight = min(node.weight, node1.weight)
 
-        if node.tag == node.weight:
-            list_path = []
-            while s:
-                node_pop = s.pop()
-                list_path.insert(0, node_pop.getKey())
-                onStack.update({node_pop.getKey(): False})
-                node_pop.weight = node.tag
-                if node_pop.getKey() is node.getKey(): break
-            lists_path_path.insert(0, list_path)
+    def __Tarjan(self, v: int):
+        global ids, list_path, lists_path_path
+
+        id=0
+        s=[]
+        recu = [(v,0)]
+        while recu:
+            v,i=recu[-1]
+            del recu[-1]
+            # onStack = info low = weight
+            node: Node_data = self.graph.get_all_v().get(v)
+            if i==0:
+                s.append(v)
+                id += 1
+                ids.update({v: id})
+                node.weight = id
+                node.info="1"
+            flag = False
+            r=0
+            for x in self.graph.all_out_edges_of_node(v):
+                to:Node_data = self.graph.get_all_v().get(x)
+                if ids.get(x) == 0:
+                    recu.append((v,r+1))
+                    recu.append((x,0))
+                    flag=True
+                    break
+                elif to.info == "1":
+                    node.weight=min(node.weight,to.weight)
+            if flag == True: continue
+
+            if node.weight == ids.get(v):
+                list_path=[]
+                while s:
+                    node_pop = s.pop()
+                    list_path.insert(0, node_pop)
+                    node_data_pop:Node_data=self.graph.get_all_v().get(node_pop)
+                    node_data_pop.info=""
+                    node_data_pop.weight = ids.get(v)
+                    if node_pop is v: break
+                lists_path_path.insert(0,list_path)
+            if recu:
+                x=v
+                v,_=recu[-1]
+                to:Node_data = self.graph.get_all_v().get(x)
+                node.weight = min(node.weight, to.weight)
+
 
     def plot_graph(self) -> None:
         graph = self.get_graph()
 
         for node in graph.get_all_v().values():
-            node: Node_data = node
+            node:Node_data=node
             if node.getpos() is None:
                 node.setpos((random.uniform(35.18, 35.2), random.uniform(32.1, 32.2)))
             matplot.plot(node.getpos()[0], node.getpos()[1], 'or', markersize=8)
             matplot.text(node.getpos()[0], node.getpos()[1], str(node.getKey()))
+
 
         for id in graph.get_all_v().keys():
             for k, w in graph.all_out_edges_of_node(id).items():
@@ -197,6 +251,6 @@ class GraphAlgo(GraphAlgoInterface):
                 x2 = graph.get_node(k).getpos()[0]
                 y2 = graph.get_node(k).getpos()[1]
 
-                matplot.arrow(x1, y1, (x2 - x1), (y2 - y1), length_includes_head=True, width=0.00005,
-                              head_width=0.0011)
+                matplot.arrow(x1, y1, (x2 - x1), (y2 - y1), length_includes_head=True, width=0.00003,
+                              head_width=0.00025)
         matplot.show()
